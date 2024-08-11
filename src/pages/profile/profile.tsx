@@ -1,11 +1,10 @@
 import { ProfileUI } from '@ui-pages';
 import { FC, SyntheticEvent, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from '../../services/store';
-import { getUser } from '../../services/slices/userSlice';
+import { getUserData } from '../../services/slices/userSlice';
 
 export const Profile: FC = () => {
-
-  const user = useSelector(getUser);
+  const user = useSelector(getUserData);
 
   /** TODO: взять переменную из стора */
   // const user = {
