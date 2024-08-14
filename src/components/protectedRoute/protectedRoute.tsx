@@ -1,7 +1,9 @@
 import { useSelector } from '../../services/store';
 import {
   getUserData,
-  getUserIsAuthenticated
+  getUserIsAuthenticated,
+  getUserIsLoading,
+  getUserIsAuthChecked
 } from '../../services/slices/userSlice';
 import { Navigate, useLocation } from 'react-router';
 import { Preloader } from '@ui';
@@ -17,18 +19,22 @@ export const ProtectedRoute = ({
 }: ProtectedRouteProps) => {
   const isAuthenticated = useSelector(getUserIsAuthenticated);
   // const user = useSelector(getUserData);
-  const location = useLocation();
-
-  // if (!isAuthenticated) {
+  // const location = useLocation();
+  const userIsLoading = useSelector(getUserIsLoading);
+  const userIsAuthChecked = useSelector(getUserIsAuthChecked);
+  // if (!onlyUnAuth || !isAuthenticated) {
   //   return <Preloader />;
   // }
-
-  if (!onlyUnAuth && !isAuthenticated) {
+  if (!onlyUnAuth && !isAuthenticated && userIsAuthChecked) {
     return <Navigate replace to='/login' />;
   }
 
   if (onlyUnAuth && isAuthenticated) {
     return <Navigate replace to='/' />;
+  }
+
+  if (userIsLoading || !userIsAuthChecked) {
+    return <Preloader />;
   }
 
   return children;
