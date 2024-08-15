@@ -5,7 +5,7 @@ import {
   getConstructorItems,
   getIngredientsIds
 } from '../../services/slices/constructorSlice';
-import { useSelector, useDispatch } from '../../services/store';
+import { useAppDispatch, useAppSelector } from '../../utils/hooks';
 import { getUserIsAuthenticated } from '../../services/slices/userSlice';
 import { useNavigate } from 'react-router';
 import {
@@ -17,16 +17,16 @@ import {
 
 export const BurgerConstructor: FC = () => {
   /** TODO: взять переменные constructorItems, orderRequest и orderModalData из стора */
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const constructorItems = useSelector(getConstructorItems);
+  const constructorItems = useAppSelector(getConstructorItems);
 
-  const orderRequest = useSelector(getOrderRequest);
+  const orderRequest = useAppSelector(getOrderRequest);
 
-  const orderModalData = useSelector(getOrderModalData);
+  const orderModalData = useAppSelector(getOrderModalData);
 
-  const userIsAuthenticated = useSelector(getUserIsAuthenticated);
-  const ingredientsIds = useSelector(getIngredientsIds);
+  const userIsAuthenticated = useAppSelector(getUserIsAuthenticated);
+  const ingredientsIds = useAppSelector(getIngredientsIds);
 
   const onOrderClick = () => {
     if (!constructorItems.bun || orderRequest) return;

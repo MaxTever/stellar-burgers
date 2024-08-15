@@ -2,7 +2,7 @@ import { FC, useEffect, useMemo } from 'react';
 import { Preloader } from '../ui/preloader';
 import { OrderInfoUI } from '../ui/order-info';
 import { TIngredient } from '@utils-types';
-import { useSelector, useDispatch } from '../../services/store';
+import { useAppSelector, useAppDispatch } from '../../utils/hooks';
 import { getIngredients } from '../../services/slices/getIngredients';
 import {
   clearRequestData,
@@ -12,10 +12,10 @@ import {
 import { useParams } from 'react-router-dom';
 
 export const OrderInfo: FC = () => {
-  const dispatch = useDispatch();
-  const orderData = useSelector(getOrderModalData);
+  const dispatch = useAppDispatch();
+  const orderData = useAppSelector(getOrderModalData);
   const { number } = useParams();
-  const ingredients = useSelector(getIngredients);
+  const ingredients = useAppSelector(getIngredients);
 
   useEffect(() => {
     dispatch(getOrderByIdThunk(Number(number)));

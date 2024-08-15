@@ -1,13 +1,13 @@
 import { ProfileOrdersUI } from '@ui-pages';
 import { FC, useEffect } from 'react';
-import { useSelector, useDispatch } from '../../services/store';
+import { useAppDispatch, useAppSelector } from '../../utils/hooks';
 import { getOrders, getOrdersThunk } from '../../services/slices/orderSlice';
 import { Preloader } from '@ui';
 
 export const ProfileOrders: FC = () => {
   /** TODO: взять переменную из стора */
-  const orders = useSelector(getOrders);
-  const dispatch = useDispatch();
+  const orders = useAppSelector(getOrders);
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     dispatch(getOrdersThunk());

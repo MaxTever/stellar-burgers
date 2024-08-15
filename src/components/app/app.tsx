@@ -5,10 +5,10 @@ import {
   Profile,
   ProfileOrders,
   Register,
-  ResetPassword
+  ResetPassword,
+  Feed,
+  NotFound404
 } from '@pages';
-import { Feed } from '@pages';
-import { NotFound404 } from '@pages';
 import { ProtectedRoute } from '../protectedRoute/protectedRoute';
 import '../../index.css';
 import styles from './app.module.css';
@@ -16,14 +16,15 @@ import { Routes, Route, useLocation, useNavigate } from 'react-router-dom';
 
 import { AppHeader, Modal, OrderInfo, IngredientDetails } from '@components';
 import { useEffect } from 'react';
-import { useDispatch } from '../../services/store';
+import { useAppDispatch } from '../../utils/hooks';
 import { getIngredientsThunk } from '../../services/slices/getIngredients';
 import { getUser } from '../../services/slices/userSlice';
+import { title } from 'process';
 
 const App = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const backgroundLocation = location.state && location.state.background;
 
   useEffect(() => {
@@ -34,7 +35,6 @@ const App = () => {
   return (
     <div className={styles.app}>
       <AppHeader />
-
       {backgroundLocation && (
         <Routes>
           <Route
@@ -129,7 +129,25 @@ const App = () => {
           </Route>
         </Route>
         {!backgroundLocation && (
-          <Route path='/ingredients/:id' element={<IngredientDetails />} />
+          <Route
+            path='/ingredients/:id'
+            element={
+              <div
+                style={{
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  marginTop: '120px',
+                  flexDirection: 'column'
+                }}
+              >
+                <h3 className={`${styles.title} text text_type_main-large`}>
+                  Детали ингридента
+                </h3>
+                <IngredientDetails />
+              </div>
+            }
+          />
         )}
       </Routes>
     </div>

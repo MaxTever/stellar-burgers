@@ -1,4 +1,4 @@
-import { useSelector } from '../../services/store';
+import { useAppSelector } from '../../utils/hooks';
 import {
   getUserData,
   getUserIsAuthenticated,
@@ -17,11 +17,11 @@ export const ProtectedRoute = ({
   onlyUnAuth,
   children
 }: ProtectedRouteProps) => {
-  const isAuthenticated = useSelector(getUserIsAuthenticated);
-  // const user = useSelector(getUserData);
+  const isAuthenticated = useAppSelector(getUserIsAuthenticated);
+  // const user = useAppSelector(getUserData);
   // const location = useLocation();
-  const userIsLoading = useSelector(getUserIsLoading);
-  const userIsAuthChecked = useSelector(getUserIsAuthChecked);
+  const userIsLoading = useAppSelector(getUserIsLoading);
+  const userIsAuthChecked = useAppSelector(getUserIsAuthChecked);
   // if (!onlyUnAuth || !isAuthenticated) {
   //   return <Preloader />;
   // }

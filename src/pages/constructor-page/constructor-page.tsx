@@ -1,4 +1,4 @@
-import { useSelector } from '../../services/store';
+import { useAppSelector } from '../../utils/hooks';
 
 import styles from './constructor-page.module.css';
 
@@ -9,7 +9,7 @@ import { FC } from 'react';
 
 export const ConstructorPage: FC = () => {
   /** TODO: взять переменную из стора */
-  const isIngredientsLoading = useSelector(
+  const isIngredientsLoading = useAppSelector(
     (state) => state.ingredientsSlice.isLoading
   );
 

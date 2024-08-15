@@ -2,7 +2,7 @@ import { forwardRef, useMemo } from 'react';
 import { TIngredientsCategoryProps } from './type';
 import { TIngredient } from '@utils-types';
 import { IngredientsCategoryUI } from '../ui/ingredients-category';
-import { useSelector } from '../../services/store';
+import { useAppSelector } from '../../utils/hooks';
 import { getConstructorItems } from '../../services/slices/constructorSlice';
 
 export const IngredientsCategory = forwardRef<
@@ -17,7 +17,7 @@ export const IngredientsCategory = forwardRef<
   //   ingredients: []
   // };
 
-  const burgerConstructor = useSelector(getConstructorItems);
+  const burgerConstructor = useAppSelector(getConstructorItems);
 
   const ingredientsCounters = useMemo(() => {
     const { bun, ingredients } = burgerConstructor;
